@@ -85,14 +85,14 @@ resource "aws_security_group" "demostack" {
   dynamic "ingress" {
     for_each = var.host_access_ip
     content {
-      from_port = 22
-      to_port   = 22
-      protocol  = "tcp"
-      cidr_blocks = [ "${ingress.value}" ]
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = ["${ingress.value}"]
     }
   }
 
-#Demostack HTTPS
+  #Demostack HTTPS
   ingress {
     from_port   = 443
     to_port     = 443
@@ -100,43 +100,43 @@ resource "aws_security_group" "demostack" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-#HTTP 
-#TODO - Remove when sslcerts are done
+  #HTTP 
+  #TODO - Remove when sslcerts are done
   ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-#Postgres port
+  #Postgres port
   ingress {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-#Consul and Vault ports
+  #Consul and Vault ports
   ingress {
     from_port   = 8000
     to_port     = 8999
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-#Fabio Ports
+  #Fabio Ports
   ingress {
     from_port   = 9998
     to_port     = 9999
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-#Nomad
-ingress {
+  #Nomad
+  ingress {
     from_port   = 3000
     to_port     = 4999
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-#More nomad ports
+  #More nomad ports
   ingress {
     from_port   = 20000
     to_port     = 29999
@@ -228,8 +228,8 @@ data "aws_iam_policy_document" "vault-server" {
       "logs:*",
       "ec2messages:*",
     ]
-      
+
     resources = ["*"]
   }
 
-  }
+}
