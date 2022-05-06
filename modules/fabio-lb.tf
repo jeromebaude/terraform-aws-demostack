@@ -50,13 +50,15 @@ resource "aws_alb_target_group" "fabio-ui" {
 resource "aws_alb_listener" "fabio" {
   load_balancer_arn = aws_alb.fabio.arn
 
-  port     = "9999"
-  protocol = "HTTP"
+  port     = "443"
+  protocol = "HTTPS"
 
   default_action {
     target_group_arn = aws_alb_target_group.fabio.arn
     type             = "forward"
   }
+  ssl_policy      = "ELBSecurityPolicy-2016-08"
+  certificate_arn = "<Provide the ARN of the default SSL server certificate>"
 }
 
 resource "aws_alb_listener" "fabio-ui" {
