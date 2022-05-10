@@ -57,6 +57,7 @@ resource "aws_alb_listener" "fabio" {
     target_group_arn = aws_alb_target_group.fabio.arn
     type             = "forward"
   }
+  ssl_policy = "ELBSecurityPolicy-TLS-1-2-2017-01"
 }
 
 resource "aws_alb_listener" "fabio-ui" {
